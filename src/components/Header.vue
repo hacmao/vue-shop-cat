@@ -31,6 +31,12 @@
             solo-inverted
           ></v-text-field>
         </v-responsive>
+        <v-btn 
+			elevation="2"
+			outlined
+		>
+			Sign In
+		</v-btn>
       </v-container>
     </v-app-bar>
 </template>
@@ -49,11 +55,12 @@ export default {
 <style>
 .header {
   padding: 10px 16px;
-}
-
-.sticky {
   position: fixed;
   top: 0;
   width: 100%
+}
+
+.v-responsive {
+	margin: 1em;
 }
 </style>
