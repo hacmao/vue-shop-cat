@@ -1,37 +1,35 @@
 <template>
   <div class="home">
     <FilterNav/>
-    <v-card
-      elevation="7"
-      
-    >
-      <v-img
-        height="250"
-        v-for="img in imgs" :key="img.src"
-        :src="img.src"
-      ></v-img>
-    </v-card>
+    <div class="listCard">
+      <CatCard v-for="cat in cats" :key="cat.id" :cat="cat"/>
+    </div>
+    
   </div>
 </template>
 
 <script>
 import FilterNav from '@/components/FilterNav.vue'
+import CatCard from '@/components/CatCard.vue'
 
 export default {
   name: "HomePage",
   data: function() {
     return {
-      imgs: [
-        {src : "https://cdn.chotot.com/1DIewdEQm1r-j8IpMQXUnTcCVXP_KcMiYylIZMbkSY0/preset:listing/plain/e30b1f210d44deeca4dd23ab892ae944-2740420474764745734.jpg"},
-        {src : "https://cdn.chotot.com/1DIewdEQm1r-j8IpMQXUnTcCVXP_KcMiYylIZMbkSY0/preset:listing/plain/e30b1f210d44deeca4dd23ab892ae944-2740420474764745734.jpg"},
-        {src : "https://cdn.chotot.com/1DIewdEQm1r-j8IpMQXUnTcCVXP_KcMiYylIZMbkSY0/preset:listing/plain/e30b1f210d44deeca4dd23ab892ae944-2740420474764745734.jpg"},
-        {src : "https://cdn.chotot.com/1DIewdEQm1r-j8IpMQXUnTcCVXP_KcMiYylIZMbkSY0/preset:listing/plain/e30b1f210d44deeca4dd23ab892ae944-2740420474764745734.jpg"},
-        {src : "https://cdn.chotot.com/1DIewdEQm1r-j8IpMQXUnTcCVXP_KcMiYylIZMbkSY0/preset:listing/plain/e30b1f210d44deeca4dd23ab892ae944-2740420474764745734.jpg"}
-      ]
+      cats: []
     }
   },
+  created: function () {
+    this.axios
+      .get('http://localhost:8000/api/cats')
+      .then(response => { 
+        this.cats = response.data
+        console.log(this.cats)
+      })
+  },
   components: {
-    FilterNav
+    FilterNav,
+    CatCard
   },
   computed: {
     count: function() {
@@ -48,15 +46,18 @@ export default {
 
 <style>
 .home {
-  top: 64px;
+  top: 100px;
   position: absolute;
-  width: 70%;
-  padding-left: 30%;
+  width: 80%;
+  padding-left: 20%;
 }
-.v-card {
-  display: grid;
-  grid-template-columns: auto auto auto;
+
+.listCard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
+
 .p {
   top: 36px
 }

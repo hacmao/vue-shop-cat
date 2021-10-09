@@ -4,10 +4,13 @@ import Router from 'vue-router'
 import Vuex from 'vuex'
 import Vuetify from 'vuetify'
 import routes from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(Router)
 Vue.use(Vuetify)
 Vue.use(Vuex)
+Vue.use(VueAxios, axios)
 
 const router = new Router({
     mode: 'history',
