@@ -1,21 +1,37 @@
 <template>
-    <v-card elevation="10">
-      <v-img
-        :src="cat.img"
-      ></v-img>
-      <p><b>Name</b>: {{ cat.name }} </p>
-      <p><b>Type</b>: {{ cat.type }} </p>
-      <p><b>Location</b>: {{ cat.location }} </p>
-      <p><b>Age</b>: {{ cat.age }} </p>
-      <p><b>Price</b>: {{ cat.price }} </p>
-      <v-btn color="red lighten-2" dark>+ Add to card</v-btn>
-    </v-card>
+    <v-hover v-slot="{ hover }"
+        open-delay="100">
+      <v-card :elevation="hover ? 20 : 5">
+        <v-img
+          :src="cat.img"
+        ></v-img>
+        <b>Name</b>: {{ cat.name }} <br>
+        <b>Type</b>: {{ cat.type }} <br>
+        <b>Location</b>: {{ cat.city.name }} <br>
+        <b>Age</b>: {{ cat.age }} <br>
+        <b>Price</b>: {{ cat.price }} <br><br>
+        
+        <v-container>
+          <v-spacer></v-spacer><v-btn color="red lighten-2" dark @click="addToCard(cat)">+ Add to card</v-btn>
+        </v-container>
+      </v-card>
+    </v-hover>
 </template>
 
 <script>
+
 export default {
     name: "CatCard",
-    props: ['cat']
+    props: ['cat'],
+    methods: {
+      addToCard: async function (cat) {
+        let payload = {
+          id: cat.id,
+          state: 2
+        }
+        this.$store.dispatch('cat/changeCatState', payload)
+      }
+    }
 }
 </script>
 

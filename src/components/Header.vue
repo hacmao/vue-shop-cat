@@ -1,16 +1,12 @@
 <template class="header">
     <v-app-bar
       app
-      color="#FFCC99"
+      color="#ccced3"
       flat
+      elevation="5"
     >
       <v-container class="py-0 fill-height">
-        <v-icon
-            large
-            color="blue darken-2"
-        >
-            mdi-message-text
-        </v-icon>
+        <img src="cat-solid.svg" width="35px">
 
         <v-btn
           v-for="link in links"
