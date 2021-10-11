@@ -1,7 +1,7 @@
 <template>
     <v-hover v-slot="{ hover }"
         open-delay="100">
-      <v-card :elevation="hover ? 20 : 5">
+      <v-card :elevation="hover ? 20 : 5" @click="catDetail(cat)">
         <v-img
           :src="cat.img"
         ></v-img>
@@ -30,6 +30,9 @@ export default {
           state: 2
         }
         this.$store.dispatch('cat/changeCatState', payload)
+      },
+      catDetail: function(cat) {
+        this.$router.push(`/cat/${cat.id}`)
       }
     }
 }

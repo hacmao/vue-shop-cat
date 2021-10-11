@@ -6,14 +6,15 @@
       elevation="5"
     >
       <v-container class="py-0 fill-height">
-        <img src="cat-solid.svg" width="35px">
+        <img src="/cat-solid.svg" width="35px">
 
         <v-btn
           v-for="link in links"
           :key="link"
           text
+          :href="link.path"
         >
-          {{ link }}
+          {{ link.name }}
         </v-btn>
 
         <v-spacer></v-spacer>
@@ -42,7 +43,16 @@ export default {
     name: "Header",
     data: function() {
         return {
-            links: ["Home", "Notify"]
+            links: [
+              {
+                name: "Home",
+                path: "/"
+              }, 
+              {
+                name: "Notify",
+                path: "/"
+              }
+            ]
         }
     }
 }

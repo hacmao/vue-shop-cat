@@ -8,7 +8,10 @@ const catState = {
 
 const state = {
     listCat: [],
-    catType: []
+    catType: [],
+    catDetail: {
+        city: ""
+    }
 }
 
 const getters = {
@@ -17,6 +20,9 @@ const getters = {
     },
     catType: state => {
         return state.catType
+    },
+    catDetail: state => {
+        return state.catDetail
     }
 }
 
@@ -26,9 +32,16 @@ const actions = {
         const cats = await catApi.listCat()
         commit('setListCat', cats)
     },
+    getCat: async({ commit }, id) => {
+        const catApi = new CatApi()
+        const cat = await catApi.getCat(id)
+        if (cat.length != 0) {
+            commit('setCatDetail', cat[0])
+        }
+    },
     changeCatState: async({ commit }, payload) => {
         const catApi = new CatApi()
-        const upadtedCat = await catApi.updateCat(payload.id, payload.state);
+        const upadtedCat = await catApi.updateCat(payload.id, payload.state)
         commit('updateListCat', upadtedCat)
     },
     getCatType: async({ commit }) => {
@@ -47,6 +60,9 @@ const actions = {
 const mutations = {
     setListCat: (state, cats) => {
         state.listCat = cats
+    },
+    setCatDetail: (state, cat) => {
+        state.catDetail = cat 
     },
     updateListCat: (state, cat) => {
         const catIdx = state.listCat.findIndex(obj => obj.id == cat.id)

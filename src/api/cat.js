@@ -12,6 +12,12 @@ export default class CatApi extends BaseApi {
         return await cats
     }
 
+    async getCat(id) {
+        const cat = axios.get(`${this.api_url}/api/cat/detail/${id}`)
+            .then(response => (response.data))
+        return cat 
+    }
+
     async updateCat(id, state) {
         const request_url = `${this.api_url}/api/cats/${id}/state`
         const body = {
