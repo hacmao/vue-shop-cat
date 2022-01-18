@@ -1,0 +1,13 @@
+env:
+  LANG: "ja_JP.UTF-8"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: pt_BR.UTF-8
+      run: |
+          sudo locale-gen {{ env.LANG }}
+          sudo update-locale LANG={{ env.LANG }}
+    - name: date
+      run: |
+          date
